@@ -22,12 +22,12 @@ class CardHolder extends Component {
   // }
 
   render() {
-    let {movie, width} = this.props;
+    let {movie, width, row} = this.props;
     const descLength = 200;
     const trimmedDesc = movie.overview.length > descLength ? movie.overview.substring(0, descLength - 3) + "..." : movie.overview;
-    console.log(movie);
+    let marginTop = row === 0 ? {marginTop:30} : {};
     return (
-      <View style={AppStyles.cardItem}>
+      <View style={[AppStyles.cardItem, marginTop]}>
         <TouchableOpacity activeOpacity={0.9} onPress={this.props.onSelect}>
           <View style={AppStyles.cardImageHolder}>
             <Image

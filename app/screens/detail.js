@@ -25,13 +25,11 @@ const {height, width} = Dimensions.get('window');
 
 class DetailScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
-        headerStyle: [AppStyles.headerStyle, {backgroundColor: 'transparent', borderBottomColor: 'transparent'}],
+        headerStyle: AppStyles.headerDetailStyle,
         title: null,
+        headerTintColor: 'white',
         headerBackTitleStyle: {
             display: 'none'
-        },
-        headerTitleStyle: {
-            color: '#fff'
         },
         headerRight:(
             <TouchableOpacity 

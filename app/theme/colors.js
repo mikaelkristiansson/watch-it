@@ -40,7 +40,7 @@ const app = {
   const tabbar = {
     tabbar: {
       background: '#ffffff',//'rgba(21, 28, 37,.7)',//'#151C25',//'#ffffff',
-      border: '#ffffff',//'rgba(21, 28, 37,.7)',//'#151C25',
+      border: '#eee',//'rgba(21, 28, 37,.7)',//'#151C25',
       iconDefault: brand.brand.primaryOpacity, //'#333'
       iconSelected: brand.brand.primary,
     },

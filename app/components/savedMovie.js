@@ -15,19 +15,28 @@ import CardHolder from './cardHolder';
 class SavedMovie extends Component {
 
   render() {
-    const {movies, height, width} = this.props;
+    const {movies, height, width, navigate} = this.props;
+    movies.map(movie => movie.favourite = true);
     return (
         <FlatList
-            style={[AppStyles.listView, {minHeight: height}]}
+            style={[AppStyles.listView, {minHeight: height-160}]}
             data={movies}
-            renderItem={({ item }) => (
-                <CardHolder movie={item} width={width} />
-                // <View style={AppStyles.savedCardHolder}>
-                //     <Image source={{uri: POSTER+item.poster_path}} style={AppStyles.savedImage} />
-                //     <View style={[AppStyles.savedTextHolder, {width: width/1.7}]}>
-                //         <Text style={AppStyles.savedTitle}>{item.title}</Text>
-                //     </View>
-                // </View>
+            renderItem={({ item, index }) => (
+                <CardHolder 
+                    movie={item} 
+                    width={width}
+                    row={index}
+                    setFavourite={(isFavourite) => {
+                        // TODO remove favourite on click
+                    }}
+                    onSelect={() => {
+                        navigate('Detail', {
+                            movie: item, 
+                            favourite: movies.find(fm => fm.id === item.id),
+                            setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
+                        });
+                    }}
+                />
             )}
             keyExtractor={item => item.id}
         />

@@ -11,9 +11,10 @@ class SavedScreen extends Component {
 
     render() {
         const { favourites } = this.props.screenProps;
+        const { navigate } = this.props.navigation;
         return (
             <View style={AppStyles.container}>
-            <SavedMovie movies={favourites} width={width} height={height} />
+                <SavedMovie movies={favourites} navigate={navigate} width={width} height={height} />
             </View>
         );
     }

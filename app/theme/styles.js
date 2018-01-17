@@ -1,10 +1,10 @@
 import Colors from './colors';
 
 export default {
-  container : {
+  container: {
     flex: 1,
     backgroundColor: Colors.background,
-    paddingTop: 20
+    marginTop: 50,
   },
   // HEADER
   headerStyle: {
@@ -16,10 +16,19 @@ export default {
     backgroundColor: Colors.topbar.background,
     //borderBottomWidth: 0,
     borderBottomColor: Colors.topbar.border,
-    height: 40
+    //height: 40
+  },
+  headerDetailStyle: {
+    position: 'absolute',
+    zIndex: 100,
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'transparent', 
+    borderBottomColor: 'transparent'
   },
   listView: {
-    paddingTop: 50,
+    //paddingTop: 50,
     backgroundColor: Colors.background
   },
   // CARDS
