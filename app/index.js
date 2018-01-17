@@ -52,7 +52,7 @@ class App extends Component {
     } else {
       return (
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
           <RootNavigation favourites={this.state.favourites} saveFavourite={(movie) => this.saveFavourite(movie)} removeFavourite={(movie) => this.removeFavourite(movie)} />
         </View>

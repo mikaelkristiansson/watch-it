@@ -16,7 +16,7 @@ class ActorImage extends Component {
   render() {
     const {cast, width} = this.props;
     return (
-        <View style={{backgroundColor: '#1E2634'}}>
+        <View>
             <View style={[AppStyles.actorHolder, {width: width-20}]}>
                 <Text style={AppStyles.movieH2}>CAST</Text>
                 <FlatList
@@ -29,7 +29,7 @@ class ActorImage extends Component {
                             <Image source={require('../../assets/images/no_img.jpg')} style={AppStyles.actorImage} />
                             }
                             <LinearGradient
-                                colors={[AppColors.linearColor, 'transparent']}
+                                colors={[AppColors.linearColorOpacity, 'transparent']}
                                 start={[1, 0]}
                                 end={[1, 0.5]}
                                 style={{

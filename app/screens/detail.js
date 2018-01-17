@@ -5,6 +5,7 @@ import {
     ScrollView, 
     Text, 
     ActivityIndicator,
+    Image,
     Dimensions
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
@@ -12,21 +13,25 @@ import {Ionicons} from '@expo/vector-icons';
 // COMPONENTS
 import LinearImage from '../components/linearImage';
 import MovieInfo from '../components/movieInfo';
+import Triangle from '../components/triangle';
 
 // API
 import { fetchMovieDetail } from '../api/tmdb';
-import {BACKDROP} from '../constants/api';
+import {BACKDROP, POSTER} from '../constants/api';
 
-import { AppStyles } from '../theme';
+import { AppColors, AppStyles } from '../theme';
 
 const {height, width} = Dimensions.get('window');
 
 class DetailScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
-        headerStyle: [AppStyles.headerStyle, {backgroundColor: 'transparent'}],
+        headerStyle: [AppStyles.headerStyle, {backgroundColor: 'transparent', borderBottomColor: 'transparent'}],
         title: null,
         headerBackTitleStyle: {
             display: 'none'
+        },
+        headerTitleStyle: {
+            color: '#fff'
         },
         headerRight:(
             <TouchableOpacity 
@@ -76,9 +81,29 @@ class DetailScreen extends Component {
             <View style={AppStyles.detail}>
                 <ScrollView style={{backgroundColor: 'transparent'}}>
                     <LinearImage image={BACKDROP + movie.backdrop_path} />
-                    <View style={{zIndex: 10, paddingTop: (height-200)}}>
+                    <View style={{zIndex: 10, paddingTop: 200}}>
+                        <Triangle
+                            width={width}
+                            extraStyle={{
+                                position: 'absolute', 
+                                top: 150,
+                                borderBottomWidth: width,
+                                borderLeftWidth: width/4, 
+                                borderRightWidth: 0, 
+                                width: width
+                            }}
+                        />
+                        <View style={AppStyles.detailImageHolder}>
+                            <Image
+                                style={AppStyles.detailImage}
+                                source={{
+                                uri: POSTER + movie.poster_path
+                            }}/>
+                        </View>
+                        <View style={{paddingTop: 250}}>
                         <Text style={AppStyles.movieTitle}>{movie.title.toUpperCase()}</Text>
                         {this.renderMovieInfo()}
+                        </View>
                     </View>
                 </ScrollView>
             </View>

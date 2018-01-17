@@ -22,46 +22,52 @@ class CardHolder extends Component {
   // }
 
   render() {
-    let {movie} = this.props;
+    let {movie, width} = this.props;
+    const descLength = 200;
+    const trimmedDesc = movie.overview.length > descLength ? movie.overview.substring(0, descLength - 3) + "..." : movie.overview;
+    console.log(movie);
     return (
       <View style={AppStyles.cardItem}>
         <TouchableOpacity activeOpacity={0.9} onPress={this.props.onSelect}>
-          <Image
-            style={AppStyles.cardImage}
-            source={{
-            uri: POSTER + movie.poster_path
-          }}/>
-          <LinearGradient
-            colors={[AppColors.linearColorOpacity, 'transparent']}
-            start={[1, 0]}
-            end={[1, 0.8]}
-            style={AppStyles.linearGradiant}/>
-          <View style={AppStyles.cardInfoHolder}>
+          <View style={AppStyles.cardImageHolder}>
+            <Image
+              style={AppStyles.cardImage}
+              source={{
+              uri: POSTER + movie.poster_path
+            }}/>
+            <LinearGradient
+              colors={[AppColors.linearColorOpacity, 'transparent']}
+              start={[1, 0]}
+              end={[1, 0.8]}
+              style={AppStyles.linearGradiant}  
+            />
+          </View>
+          <View style={[AppStyles.cardInfoHolder, {width: width/1.7}]}>
             <View style={AppStyles.cardTextHolder}>
               <Text style={AppStyles.cardTitle}>{movie.title}</Text>
               <Text style={AppStyles.cardDate}>({movie.release_date.substring(0, 4)})</Text>
-            </View>
-            <View>
-              <FontAwesome
-                name={'star'}
-                size={32}
-                color={AppColors.brand.primary}
-                style={AppStyles.starIcon}
-              />
-              <Text style={AppStyles.iconText}>{movie.vote_average.toFixed(1)}</Text>
+              <Text style={AppStyles.cardDesc}>{trimmedDesc}</Text>
             </View>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
             this.props.setFavourite(movie.favourite ? true : false);
-            //this.setState({favourite: this.state.favourite = !this.state.favourite})
-            }} style={{position: 'absolute', zIndex: 4, right: 10, bottom: 10, backgroundColor: 'transparent'}}>
+            }} style={AppStyles.cardIconHolder}>
           <Ionicons 
             name={movie.favourite ? 'ios-heart' : 'ios-heart-outline'} 
-            size={36}
-            color={AppColors.brand.secondary}
+            size={32}
+            color={AppColors.brand.heart}
           />
         </TouchableOpacity>
+        <View style={AppStyles.cardRating}>
+          {/* <FontAwesome
+            name={'star'}
+            size={42}
+            color={AppColors.brand.primary}
+            style={AppStyles.starIcon}
+          /> */}
+          <Text style={AppStyles.iconText}>{movie.vote_average.toFixed(1)}</Text>
+        </View>
       </View>
     );
   }

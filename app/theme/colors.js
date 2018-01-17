@@ -1,16 +1,18 @@
 const app = {
-    background: '#151C25',//'#49477A',
-    cardBackground: '#151C25',
+    background: '#F4F5F9',//'#49477A',
+    cardBackground: '#fff',
     listItemBackground: '#FFFFFF',
-    linearColor: '#151C25',
+    linearColor: '#37CEBD',//'#151C25',
     linearColorOpacity: 'rgba(21, 28, 37,.7)',
-    detailBackground: '#151C25',
+    detailBackground: '#fff',
   };
     
   const brand = {
     brand: {
-      primary: '#FECA13',//'#0E4EF8',
-      secondary: '#e31b23'//'#17233D',
+      primary: '#37CEBD',//'#FECA13',//'#0E4EF8',
+      primaryOpacity: 'rgba(55, 206, 189, .5)',
+      secondary: '#FFA044',//'#17233D',
+      heart: '#e31b23'
     },
   };
     
@@ -28,17 +30,19 @@ const app = {
 
   const topBar = {
     topbar: {
-      background: 'rgba(21, 28, 37,.7)',
-      title: '#fff'
+      background: '#fff',//'rgba(21, 28, 37,.7)',
+      border: '#eee',
+      title: brand.brand.primary,
+      icon: '#999'
     }
   };
     
   const tabbar = {
     tabbar: {
-      background: 'rgba(21, 28, 37,.7)',//'#151C25',//'#ffffff',
-      border: 'rgba(21, 28, 37,.7)',//'#151C25',
-      iconDefault: '#9a9ca0', //'#333'
-      iconSelected: '#fff',
+      background: '#ffffff',//'rgba(21, 28, 37,.7)',//'#151C25',//'#ffffff',
+      border: '#ffffff',//'rgba(21, 28, 37,.7)',//'#151C25',
+      iconDefault: brand.brand.primaryOpacity, //'#333'
+      iconSelected: brand.brand.primary,
     },
   };
   

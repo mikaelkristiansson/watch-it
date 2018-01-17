@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, ListView, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, ListView, Text, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
 // API
@@ -8,7 +8,9 @@ import { fetchMoviePopular } from '../api/tmdb';
 // COMPONENTS
 import CardHolder from '../components/cardHolder';
 
-import { AppStyles } from '../theme';
+import { AppStyles, AppColors } from '../theme';
+
+const {height, width} = Dimensions.get('window');
 
 class MoviesScreen extends Component {
     static navigationOptions = {
@@ -17,7 +19,7 @@ class MoviesScreen extends Component {
                 onPress={() => {alert('gg')} }
                 style={{marginRight: 10}}
             >
-                <Ionicons name={'ios-search'} size={26} color={'#fff'} />
+                <Ionicons name={'ios-search'} size={26} color={AppColors.topbar.icon} />
             </TouchableOpacity>
         ),
     };
@@ -130,6 +132,7 @@ class MoviesScreen extends Component {
                     renderRow={(movie) => (
                         <CardHolder
                             movie={movie}
+                            width={width}
                             setFavourite={(isFavourite) => {
                                 this.setFavourite(isFavourite, movie);
                             }}

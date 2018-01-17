@@ -23,9 +23,10 @@ const movieStack = StackNavigator({
   navigationOptions: ({ navigation }) => ({
     title: `${navigation.state.routeName.toUpperCase()}`,
     headerStyle: AppStyles.headerStyle,
-    headerTintColor: AppColors.topbar.title,
+    headerTintColor: '#fff',
     headerTitleStyle: {
-      fontFamily: 'dosis-bold'
+      fontFamily: 'dosis-bold',
+      color: AppColors.topbar.title
     }
   }),
 })
@@ -33,6 +34,9 @@ const movieStack = StackNavigator({
 const savedStack = StackNavigator({
   Saved: {
     screen: SavedScreen,
+  },
+  Detail: {
+    screen: DetailScreen,
   },
 },
 {
@@ -86,11 +90,11 @@ export default TabNavigator(
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         backgroundColor: AppColors.tabbar.background, 
         borderTopColor: AppColors.tabbar.border,
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: 40
+        // position: 'absolute',
+        // left: 0,
+        // right: 0,
+        // bottom: 0,
+        // height: 40
       },
       showLabel: false,
     },
