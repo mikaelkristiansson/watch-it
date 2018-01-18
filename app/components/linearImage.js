@@ -29,7 +29,7 @@ class LinearImage extends Component {
             <LinearGradient
             colors={[AppColors.linearColor, 'transparent']}
             start={[1, 0]}
-            end={[1, 0.5]}
+            end={[1, 0.8]}
             style={{
                 position: 'absolute',
                 left: 0,

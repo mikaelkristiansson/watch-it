@@ -9,17 +9,13 @@ import {
   View
 } from 'react-native';
 import {LinearGradient} from 'expo';
-import {FontAwesome, Ionicons} from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 
 import {POSTER} from '../constants/api';
 
 import {AppStyles, AppColors} from '../theme';
 
 class CardHolder extends Component {
-
-  // state = {
-  //   favourite: this.props.favourite
-  // }
 
   render() {
     let {movie, width, row} = this.props;
@@ -35,12 +31,6 @@ class CardHolder extends Component {
               source={{
               uri: POSTER + movie.poster_path
             }}/>
-            <LinearGradient
-              colors={[AppColors.linearColorOpacity, 'transparent']}
-              start={[1, 0]}
-              end={[1, 0.8]}
-              style={AppStyles.linearGradiant}  
-            />
           </View>
           <View style={[AppStyles.cardInfoHolder, {width: width/1.7}]}>
             <View style={AppStyles.cardTextHolder}>
@@ -60,12 +50,6 @@ class CardHolder extends Component {
           />
         </TouchableOpacity>
         <View style={AppStyles.cardRating}>
-          {/* <FontAwesome
-            name={'star'}
-            size={42}
-            color={AppColors.brand.primary}
-            style={AppStyles.starIcon}
-          /> */}
           <Text style={AppStyles.iconText}>{movie.vote_average.toFixed(1)}</Text>
         </View>
       </View>

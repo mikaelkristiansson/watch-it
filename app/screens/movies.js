@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, ListView, FlatList, Text, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
+import { View, FlatList, Text, ActivityIndicator, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
 // API
@@ -27,7 +27,6 @@ class MoviesScreen extends Component {
     constructor() {
         super();
         this.state = {
-            //dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
             movies: [],
             moviesLoaded: false,
             pagePending: true,
@@ -63,7 +62,6 @@ class MoviesScreen extends Component {
             movies: newMovies,
             moviesLoaded: true,
             pagePending: false,
-            //dataSource: this.getDataSource(newMovies),
             next: parseInt(data.page)+1
         });
       }
@@ -108,7 +106,6 @@ class MoviesScreen extends Component {
 
         this.setState({
             movies: newMovies,
-            //dataSource: this.state.dataSource.cloneWithRows(newMovies),
         });
     }
 
@@ -123,58 +120,33 @@ class MoviesScreen extends Component {
             );
         }
         return (
-            <View style={AppStyles.container}>
-                <FlatList
-                    style={[AppStyles.listView, {minHeight: height-160}]}
-                    data={this.state.movies}
-                    renderItem={({ item, index }) => (
-                        <CardHolder 
-                            movie={item} 
-                            width={width}
-                            row={index}
-                            setFavourite={(isFavourite) => {
-                                this.setFavourite(isFavourite, item);
-                            }}
-                            onSelect={() => {
-                                navigate('Detail', {
-                                    movie: item, 
-                                    favourite: this.state.movies.find(fm => fm.id === item.id),
-                                    setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
-                                });
-                            }}
-                        />
-                    )}
-                    onEndReached={this.onEndReached}
-                    keyExtractor={item => item.id}
-                />
-                {/* <ListView
-                    style={AppStyles.listView}
-                    ref='listview'
-                    dataSource={this.state.dataSource}
-                    renderFooter={() => this.renderFooter()}
-                    renderRow={(movie, section, row) => (
-                        <CardHolder
-                            movie={movie}
-                            width={width}
-                            row={row}
-                            setFavourite={(isFavourite) => {
-                                this.setFavourite(isFavourite, movie);
-                            }}
-                            onSelect={() => {
-                                navigate('Detail', {
-                                    movie: movie, 
-                                    favourite: favourites.find(fm => fm.id === movie.id), 
-                                    setFavourite: (isFavourite) => this.setFavourite(isFavourite, movie)
-                                });
-                            }}
-                        />
-                    )}
-                    onEndReached={this.onEndReached}
-                    automaticallyAdjustContentInsets={false}
-                    keyboardDismissMode='on-drag'
-                    showsVerticalScrollIndicator={true}
-                /> */}
-            </View>
+            <SafeAreaView>
+                <View style={AppStyles.container}>
+                    <FlatList
+                        style={[AppStyles.listView, {minHeight: height-160}]}
+                        data={this.state.movies}
+                        renderItem={({ item, index }) => (
+                            <CardHolder 
+                                movie={item} 
+                                width={width}
+                                row={index}
+                                setFavourite={(isFavourite) => {
+                                    this.setFavourite(isFavourite, item);
+                                }}
+                                onSelect={() => {
+                                    navigate('Detail', {
+                                        movie: item, 
+                                        favourite: this.state.movies.find(fm => fm.id === item.id),
+                                        setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
+                                    });
+                                }}
+                            />
+                        )}
+                        onEndReached={this.onEndReached}
+                        keyExtractor={item => item.id}
+                    />
+                </View>
+            </SafeAreaView>
         );
     }
 

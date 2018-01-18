@@ -19,7 +19,7 @@ class MovieInfo extends Component {
   render() {
     const {movie, height, width} = this.props;
     return (
-        <View style={{flexDirection: 'column'}}>
+        <View style={AppStyles.detailInfoHolder}>
             <View style={{marginLeft: 10, width: width-20}}>
                 <Text style={AppStyles.movieSubText}>{movie.release_date}, {movie.runtime} min, ({movie.status})</Text>
                 <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingBottom: 10}}>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, SafeAreaView } from 'react-native';
 
 import { AppStyles } from '../theme';
 
@@ -13,9 +13,11 @@ class SavedScreen extends Component {
         const { favourites } = this.props.screenProps;
         const { navigate } = this.props.navigation;
         return (
-            <View style={AppStyles.container}>
-                <SavedMovie movies={favourites} navigate={navigate} width={width} height={height} />
-            </View>
+            <SafeAreaView>
+                <View style={AppStyles.container}>
+                    <SavedMovie movies={favourites} navigate={navigate} width={width} height={height} />
+                </View>
+            </SafeAreaView>
         );
     }
 

@@ -4,7 +4,7 @@ export default {
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-    marginTop: 50,
+    marginTop: 45,
   },
   // HEADER
   headerStyle: {
@@ -16,7 +16,7 @@ export default {
     backgroundColor: Colors.topbar.background,
     //borderBottomWidth: 0,
     borderBottomColor: Colors.topbar.border,
-    //height: 40
+    height: 45
   },
   headerDetailStyle: {
     position: 'absolute',
@@ -153,6 +153,10 @@ export default {
     shadowOpacity: 0.5,
     shadowRadius: 4
   },
+  detailInfoHolder: {
+    flexDirection: 'column',
+    backgroundColor: Colors.detailBackground
+  },
   movieTitle: {
     color: Colors.textPrimary, 
     fontSize: 23, 
@@ -183,7 +187,7 @@ export default {
     paddingBottom: 5
   },
   movieDescription: {
-    fontFamily: 'dosis-bold',
+    fontFamily: 'dosis-medium',
     fontSize: 16
   },
   movieH2: {
@@ -196,10 +200,7 @@ export default {
   // ACTOR
   actorHolder: {
     marginLeft: 10, 
-    shadowColor: 'black',
-    shadowOffset: { height: 2, width: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 1
+    marginBottom: 50
   },
   actorImage: {
     position: 'absolute',

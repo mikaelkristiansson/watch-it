@@ -6,7 +6,7 @@ import {
     Text, 
     ActivityIndicator,
     Image,
-    Dimensions
+    Dimensions,
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
@@ -99,8 +99,8 @@ class DetailScreen extends Component {
                             }}/>
                         </View>
                         <View style={{paddingTop: 250}}>
-                        <Text style={AppStyles.movieTitle}>{movie.title.toUpperCase()}</Text>
-                        {this.renderMovieInfo()}
+                            <Text style={AppStyles.movieTitle}>{movie.title.toUpperCase()}</Text>
+                            {this.renderMovieInfo()}
                         </View>
                     </View>
                 </ScrollView>
