@@ -41,7 +41,13 @@ class SavedMovie extends Component {
                         navigate('Detail', {
                             movie: item, 
                             favourite: movies.find(fm => fm.id === item.id),
-                            setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
+                            setFavourite: (isFavourite) => { 
+                                if(isFavourite) {
+                                    this.props.removeFavourite(item);
+                                } else {
+                                    this.props.saveFavourite(item)
+                                }
+                            }
                         });
                     }}
                 />
