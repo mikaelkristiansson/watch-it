@@ -39,7 +39,9 @@ class RootNavigator extends Component {
 
   render() {
     return <RootStackNavigator screenProps={{
+      movies: this.props.movies,
       favourites: this.props.favourites,
+      loadMovies: (movies) => this.props.loadMovies(movies),
       saveFavourite: (movie) => this.props.saveFavourite(movie),
       removeFavourite: (movie) => this.props.removeFavourite(movie),
       }} />;

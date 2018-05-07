@@ -10,7 +10,8 @@ import {AppColors} from './theme';
 class App extends Component {
   state = {
     isLoadingComplete: false,
-    favourites: []
+    favourites: [],
+    movies: []
   };
 
   componentWillMount() {
@@ -24,6 +25,7 @@ class App extends Component {
   }
 
   saveFavourite = (movie) => {
+    this.updateFavState(movie, true);
     movieStore.save(movie).then((movies) => {
       this.setState({
         favourites: movies
@@ -33,10 +35,50 @@ class App extends Component {
   }
 
   removeFavourite = (movie) => {
+    this.updateFavState(movie, false);
     movieStore.remove(movie).then((movies) => {
       this.setState({
         favourites: movies
       });
+    });
+  }
+
+  updateFavState(movie, isFavourite) {
+    const movies = this.state.movies;
+    // updatedMovies.map(m => {
+    //   m.favourite = false;
+    //   // if (m.id === movie.id) {
+    //   //   m.favourite = false;
+    //   //   alert(m.favourite);
+    //   // }
+    // });
+    const idx = movies.findIndex(m => m.id === movie.id);
+    // movies[idx].favourite = !isFavourite;
+    // alert(movies[idx].favourite);
+    let newMovies = movies.slice();
+    newMovies[idx] = {
+    ...movies[idx],
+    favourite: isFavourite,
+    };
+
+    this.setState({
+        movies: newMovies,
+    });
+  }
+
+  loadMovies = (movies) => {
+    if (!movies.results.length) return;
+    let newMovies = this.state.movies.concat(movies.results);
+    newMovies.map(movie => {
+        let fav = this.state.favourites.find(fm => fm.id === movie.id);
+        if(fav) {
+            movie.favourite = true;
+        } else {
+            movie.favourite = false;
+        }
+    });
+    this.setState({
+        movies: newMovies
     });
   }
 
@@ -54,7 +96,7 @@ class App extends Component {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-          <RootNavigation favourites={this.state.favourites} saveFavourite={(movie) => this.saveFavourite(movie)} removeFavourite={(movie) => this.removeFavourite(movie)} />
+          <RootNavigation favourites={this.state.favourites} movies={this.state.movies} loadMovies={(movies) => this.loadMovies(movies)} saveFavourite={(movie) => this.saveFavourite(movie)} removeFavourite={(movie) => this.removeFavourite(movie)} />
         </View>
       );
     }

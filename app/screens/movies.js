@@ -27,7 +27,7 @@ class MoviesScreen extends Component {
     constructor() {
         super();
         this.state = {
-            movies: [],
+            //movies: [],
             moviesLoaded: false,
             pagePending: true,
             next: 0,
@@ -48,18 +48,19 @@ class MoviesScreen extends Component {
     }
 
     processsResults(data) {
-        if (!data.results.length) return;
-        let newMovies = this.state.movies.concat(data.results);
-        newMovies.map(movie => {
-            let fav = this.props.screenProps.favourites.find(fm => fm.id === movie.id);
-            if(fav) {
-                movie.favourite = true;
-            } else {
-                movie.favourite = false;
-            }
-        });
+        this.props.screenProps.loadMovies(data);
+        // if (!data.results.length) return;
+        // let newMovies = this.state.movies.concat(data.results);
+        // newMovies.map(movie => {
+        //     let fav = this.props.screenProps.favourites.find(fm => fm.id === movie.id);
+        //     if(fav) {
+        //         movie.favourite = true;
+        //     } else {
+        //         movie.favourite = false;
+        //     }
+        // });
         this.setState({
-            movies: newMovies,
+            //movies: newMovies,
             moviesLoaded: true,
             pagePending: false,
             next: parseInt(data.page)+1
@@ -96,22 +97,22 @@ class MoviesScreen extends Component {
         } else {
             this.props.screenProps.saveFavourite(movie);
         }
-        const movies = this.state.movies;
-        const idx = movies.findIndex(m => m.id === movie.id);
-        let newMovies = movies.slice();
-        newMovies[idx] = {
-        ...movies[idx],
-        favourite: !isFavourite,
-        };
+        // const movies = this.state.movies;
+        // const idx = movies.findIndex(m => m.id === movie.id);
+        // let newMovies = movies.slice();
+        // newMovies[idx] = {
+        // ...movies[idx],
+        // favourite: !isFavourite,
+        // };
 
-        this.setState({
-            movies: newMovies,
-        });
+        // this.setState({
+        //     movies: newMovies,
+        // });
     }
 
     render() {
         const { navigate } = this.props.navigation;
-        const { favourites } = this.props.screenProps;
+        let { movies } = this.props.screenProps;
         if (!this.state.moviesLoaded) {
             return (
                 <View style={AppStyles.container}>
@@ -123,7 +124,7 @@ class MoviesScreen extends Component {
             <View style={AppStyles.container}>
                 <FlatList
                     style={AppStyles.listView}
-                    data={this.state.movies}
+                    data={this.props.screenProps.movies}
                     renderItem={({ item, index }) => (
                         <CardHolder 
                             movie={item} 
@@ -135,7 +136,7 @@ class MoviesScreen extends Component {
                             onSelect={() => {
                                 navigate('Detail', {
                                     movie: item, 
-                                    favourite: this.state.movies.find(fm => fm.id === item.id),
+                                    favourite: movies.find(fm => fm.id === item.id),
                                     setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
                                 });
                             }}

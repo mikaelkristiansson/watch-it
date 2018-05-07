@@ -14,7 +14,7 @@ class SavedScreen extends Component {
         const { navigate } = this.props.navigation;
         return (
             <View style={AppStyles.container}>
-                <SavedMovie movies={favourites} navigate={navigate} width={width} height={height} />
+                <SavedMovie movies={favourites} navigate={navigate} savedFavourite={(movie) => this.props.screenProps.saveFavourite(movie)} removeFavourite={(movie) => this.props.screenProps.removeFavourite(movie)} width={width} height={height} />
             </View>
         );
     }
