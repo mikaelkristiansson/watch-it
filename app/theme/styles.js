@@ -25,7 +25,8 @@ export default {
     left: 0,
     right: 0,
     backgroundColor: 'transparent', 
-    borderBottomColor: 'transparent'
+    borderBottomColor: 'transparent',
+    height: 45
   },
   listView: {
     //paddingTop: 50,

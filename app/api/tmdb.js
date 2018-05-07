@@ -2,6 +2,7 @@
 import { API_KEY } from '../constants/api';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
+const TMDB_URL = 'https://www.themoviedb.org';
 
 const fetchData = (params, page) =>
   fetch(`${BASE_URL}/${params}?api_key=${API_KEY}&language=en-US${page ? '&page='+ (page || '1') : ''}`)
@@ -39,6 +40,19 @@ export const searchMovie = async (query, page) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const searchAnything = async (query, page) => {
+  try {
+    return await fetchSearch('search/multi', query, page);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const searchSuggestions = async (query) => {
+  return fetch(`${TMDB_URL}/search/multi?language=en-US&query=${query}`)
+  .then(res => res.json());
 };
 
 export const fetchMoviesSimilar = async movieId => {

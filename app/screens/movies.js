@@ -13,16 +13,16 @@ import { AppStyles, AppColors } from '../theme';
 const {height, width} = Dimensions.get('window');
 
 class MoviesScreen extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({ navigation, screenProps }) => ({
         headerRight:(
             <TouchableOpacity 
-                onPress={() => {alert('gg')} }
+                onPress={() => {navigation.navigate('Search')}}
                 style={{marginRight: 10}}
             >
                 <Ionicons name={'ios-search'} size={26} color={AppColors.topbar.icon} />
             </TouchableOpacity>
         ),
-    };
+    });
 
     constructor() {
         super();
@@ -120,33 +120,31 @@ class MoviesScreen extends Component {
             );
         }
         return (
-            <SafeAreaView>
-                <View style={AppStyles.container}>
-                    <FlatList
-                        style={[AppStyles.listView, {minHeight: height-160}]}
-                        data={this.state.movies}
-                        renderItem={({ item, index }) => (
-                            <CardHolder 
-                                movie={item} 
-                                width={width}
-                                row={index}
-                                setFavourite={(isFavourite) => {
-                                    this.setFavourite(isFavourite, item);
-                                }}
-                                onSelect={() => {
-                                    navigate('Detail', {
-                                        movie: item, 
-                                        favourite: this.state.movies.find(fm => fm.id === item.id),
-                                        setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
-                                    });
-                                }}
-                            />
-                        )}
-                        onEndReached={this.onEndReached}
-                        keyExtractor={item => item.id}
-                    />
-                </View>
-            </SafeAreaView>
+            <View style={AppStyles.container}>
+                <FlatList
+                    style={AppStyles.listView}
+                    data={this.state.movies}
+                    renderItem={({ item, index }) => (
+                        <CardHolder 
+                            movie={item} 
+                            width={width}
+                            row={index}
+                            setFavourite={(isFavourite) => {
+                                this.setFavourite(isFavourite, item);
+                            }}
+                            onSelect={() => {
+                                navigate('Detail', {
+                                    movie: item, 
+                                    favourite: this.state.movies.find(fm => fm.id === item.id),
+                                    setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
+                                });
+                            }}
+                        />
+                    )}
+                    onEndReached={this.onEndReached}
+                    keyExtractor={item => item.id}
+                />
+            </View>
         );
     }
 

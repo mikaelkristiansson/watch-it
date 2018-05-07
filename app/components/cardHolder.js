@@ -6,7 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 import {LinearGradient} from 'expo';
 import {Ionicons} from '@expo/vector-icons';
@@ -15,13 +16,16 @@ import {POSTER} from '../constants/api';
 
 import {AppStyles, AppColors} from '../theme';
 
+const { height } = Dimensions.get('window');
+
 class CardHolder extends Component {
 
   render() {
     let {movie, width, row} = this.props;
     const descLength = 200;
     const trimmedDesc = movie.overview.length > descLength ? movie.overview.substring(0, descLength - 3) + "..." : movie.overview;
-    let marginTop = row === 0 ? {marginTop:30} : {};
+    const extraMargin = height >= 812 ? 20 : 0;
+    let marginTop = row === 0 ? {marginTop:45+extraMargin} : {};
     return (
       <View style={[AppStyles.cardItem, marginTop]}>
         <TouchableOpacity activeOpacity={0.9} onPress={this.props.onSelect}>

@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import DetailScreen from '../screens/detail';
+import SearchScreen from '../screens/search';
 //import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -13,6 +14,9 @@ const RootStackNavigator = StackNavigator(
     },
     Detail: {
       screen: DetailScreen,
+    },
+    Search: {
+      screen: SearchScreen,
     }
   },
   {
