@@ -17,6 +17,13 @@ class SavedMovie extends Component {
   render() {
     const {movies, height, width, navigate} = this.props;
     movies.map(movie => movie.favourite = true);
+    if (!movies.length) {
+        return (
+            <View style={AppStyles.container}>
+                <Text>You Have No Saved Movies Yet :(</Text>
+            </View>
+        );
+    }
     return (
         <FlatList
             style={[AppStyles.listView, {minHeight: height-160}]}
@@ -28,12 +35,19 @@ class SavedMovie extends Component {
                     row={index}
                     setFavourite={(isFavourite) => {
                         // TODO remove favourite on click
+                        this.props.removeFavourite(item);
                     }}
                     onSelect={() => {
                         navigate('Detail', {
                             movie: item, 
                             favourite: movies.find(fm => fm.id === item.id),
-                            setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
+                            setFavourite: (isFavourite) => { 
+                                if(isFavourite) {
+                                    this.props.removeFavourite(item);
+                                } else {
+                                    this.props.saveFavourite(item)
+                                }
+                            }
                         });
                     }}
                 />
