@@ -9,9 +9,9 @@ const app = {
     
   const brand = {
     brand: {
-      primary: '#37CEBD',//'#FECA13',//'#0E4EF8',
-      primaryOpacity: 'rgba(55, 206, 189, .5)',
-      secondary: '#FFA044',//'#17233D',
+      primary: '#FFBC00',//'#37CEBD',//'#FECA13',//'#0E4EF8',
+      primaryOpacity: '#DEDEDE',//'rgba(55, 206, 189, .5)',
+      secondary: '#FFBC00',//'#FFA044',//'#17233D',
       heart: '#e31b23'
     },
   };
@@ -40,7 +40,7 @@ const app = {
   const tabbar = {
     tabbar: {
       background: '#ffffff',//'rgba(21, 28, 37,.7)',//'#151C25',//'#ffffff',
-      border: '#eee',//'rgba(21, 28, 37,.7)',//'#151C25',
+      border: 'transparent',//'#eee',//'rgba(21, 28, 37,.7)',//'#151C25',
       iconDefault: brand.brand.primaryOpacity, //'#333'
       iconSelected: brand.brand.primary,
     },

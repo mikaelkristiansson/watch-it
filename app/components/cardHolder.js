@@ -48,7 +48,7 @@ class CardHolder extends Component {
             this.props.setFavourite(movie.favourite ? true : false);
             }} style={AppStyles.cardIconHolder}>
           <Ionicons 
-            name={movie.favourite ? 'ios-heart' : 'ios-heart-outline'} 
+            name={movie.favourite ? 'ios-heart' : 'ios-heart-empty'} 
             size={32}
             color={AppColors.brand.heart}
           />

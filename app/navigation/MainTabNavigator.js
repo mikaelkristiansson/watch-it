@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, StatusBar } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 
 // SCREENS
 import MoviesScreen from '../screens/movies';
@@ -10,40 +10,8 @@ import SavedScreen from '../screens/saved';
 // THEME
 import { AppColors, AppStyles } from '../theme';
 
-const movieStack = StackNavigator({
-  Movies: {
-    screen: MoviesScreen,
-  }
-},
-{
-  navigationOptions: ({ navigation }) => ({
-    title: `${navigation.state.routeName.toUpperCase()}`,
-    headerStyle: AppStyles.headerStyle,
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontFamily: 'dosis-bold',
-      color: AppColors.topbar.title
-    }
-  }),
-})
 
-const savedStack = StackNavigator({
-  Saved: {
-    screen: SavedScreen,
-  }
-},
-{
-  navigationOptions: ({ navigation }) => ({
-    title: `${navigation.state.routeName.toUpperCase()}`,
-    headerStyle: AppStyles.headerStyle,
-    headerTintColor: AppColors.topbar.title,
-    headerTitleStyle: {
-      fontFamily: 'dosis-bold'
-    }
-  }),
-})
-
-export default TabNavigator(
+export default createBottomTabNavigator(
   {
     Movies: {
       screen: MoviesScreen,
@@ -75,13 +43,13 @@ export default TabNavigator(
           />
         );
       },
-      title: `${navigation.state.routeName.toUpperCase()}`,
-      //header: null,
-      headerStyle: AppStyles.headerStyle,
-      headerTintColor: AppColors.topbar.title,
-      headerTitleStyle: {
-        fontFamily: 'dosis-bold',
-      }
+      // title: `${navigation.state.routeName.toUpperCase()}`,
+      // //header: null,
+      // headerStyle: AppStyles.headerStyle,
+      // headerTintColor: AppColors.topbar.title,
+      // headerTitleStyle: {
+      //   fontFamily: 'dosis-bold',
+      // }
     }),
     tabBarOptions: {
       style: {
@@ -96,7 +64,6 @@ export default TabNavigator(
       },
       showLabel: false,
     },
-    tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: true,

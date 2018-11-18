@@ -18,7 +18,7 @@ class SearchResults extends Component {
     const {movies, height, width, navigate} = this.props;
     return (
         <FlatList
-            style={AppStyles.listView}
+            style={[AppStyles.listView, {marginTop: 0}]}
             data={movies}
             renderItem={({ item, index }) => (
                 <CardHolder 
@@ -37,7 +37,7 @@ class SearchResults extends Component {
                     }}
                 />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
         />
     );
   }

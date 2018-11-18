@@ -48,7 +48,7 @@ class ActorImage extends Component {
                             </View>
                         </View>
                     )}
-                    keyExtractor={(item, index) => index}
+                    keyExtractor={(item, index) => index.toString()}
                     horizontal={true}
                 />
             </View>

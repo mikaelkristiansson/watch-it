@@ -25,9 +25,9 @@ const {height, width} = Dimensions.get('window');
 
 class DetailScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
-        headerStyle: AppStyles.headerDetailStyle,
+        headerTransparent: true,
         title: null,
-        headerTintColor: 'white',
+        headerTintColor: AppColors.brand.primary,
         headerBackTitleStyle: {
             display: 'none'
         },
@@ -36,7 +36,11 @@ class DetailScreen extends Component {
                 onPress={() => {navigation.state.params.setFavourite(screenProps.favourites.find(fm => fm.id === navigation.state.params.movie.id));} }
                 style={{marginRight: 10}}
             >
-                <Ionicons name={`ios-heart${screenProps.favourites.find(fm => fm.id === navigation.state.params.movie.id) ? '' : '-outline'}`} size={32} color={'#fff'} />
+                <Ionicons 
+                    name={`ios-heart${screenProps.favourites.find(fm => fm.id === navigation.state.params.movie.id) ? '' : '-empty'}`} 
+                    size={32} 
+                    color={AppColors.brand.heart} 
+                />
             </TouchableOpacity>
         ),
     });

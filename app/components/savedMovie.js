@@ -52,7 +52,7 @@ class SavedMovie extends Component {
                     }}
                 />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
         />
     );
   }

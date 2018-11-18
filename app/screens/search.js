@@ -107,7 +107,7 @@ class SearchScreen extends Component {
     const { navigate } = this.props.navigation;
     const extraMargin = height >= 812 ? 20 : 0;
     return (
-      <View style={[AppStyles.container, {paddingTop: 20+extraMargin}]}>
+      <View style={[AppStyles.container]}>
           <SearchBar
             lightTheme
             containerStyle={{backgroundColor: '#fff', borderBottomWidth: 0, borderTopWidth: 0}}

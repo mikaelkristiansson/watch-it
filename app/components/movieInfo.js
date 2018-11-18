@@ -47,7 +47,7 @@ class MovieInfo extends Component {
                             source={{uri: `https://www.youtube.com/embed/${item.key}?rel=0&autoplay=0&showinfo=0&controls=0`}}
                         />
                     )}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.id.toString()}
                     horizontal={true}
                 />
             </View>

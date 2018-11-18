@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-import RootNavigation from './navigation/RootNavigation';
+import AppNavigator from './navigation/AppNavigator';
 
 import movieStore from './stores/movieStore';
 import {AppColors} from './theme';
@@ -14,7 +14,7 @@ class App extends Component {
     movies: []
   };
 
-  componentWillMount() {
+  componentDidMount() {
     movieStore.load().then(fav => {
       if(fav.movies.length) {
         this.setState({
@@ -96,7 +96,7 @@ class App extends Component {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-          <RootNavigation favourites={this.state.favourites} movies={this.state.movies} loadMovies={(movies) => this.loadMovies(movies)} saveFavourite={(movie) => this.saveFavourite(movie)} removeFavourite={(movie) => this.removeFavourite(movie)} />
+          <AppNavigator favourites={this.state.favourites} movies={this.state.movies} loadMovies={(movies) => this.loadMovies(movies)} saveFavourite={(movie) => this.saveFavourite(movie)} removeFavourite={(movie) => this.removeFavourite(movie)} />
         </View>
       );
     }

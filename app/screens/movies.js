@@ -143,7 +143,7 @@ class MoviesScreen extends Component {
                         />
                     )}
                     onEndReached={this.onEndReached}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.id.toString()}
                 />
             </View>
         );

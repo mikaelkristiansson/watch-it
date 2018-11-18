@@ -4,19 +4,18 @@ export default {
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-    marginTop: 45,
+    //marginTop: 45,
   },
   // HEADER
   headerStyle: {
-    position: 'absolute',
-    zIndex: 100,
-    top: 0,
-    left: 0,
-    right: 0,
     backgroundColor: Colors.topbar.background,
     //borderBottomWidth: 0,
     borderBottomColor: Colors.topbar.border,
-    height: 45
+    height: 45,
+    shadowColor: 'black',
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5
   },
   headerDetailStyle: {
     position: 'absolute',
@@ -29,6 +28,7 @@ export default {
     height: 45
   },
   listView: {
+    marginTop: -30,
     //paddingTop: 50,
     backgroundColor: Colors.background
   },
@@ -44,7 +44,7 @@ export default {
     shadowColor: 'black',
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 0.1,
-    shadowRadius: 1
+    shadowRadius: 5
   },
   cardImageHolder: {
     position: 'absolute',
@@ -172,7 +172,7 @@ export default {
     paddingRight: 8,
     borderWidth: 1,
     borderColor: 'transparent',
-    backgroundColor: 'rgba(0,0,0,.1)',
+    backgroundColor: '#e3e3e3',
     overflow: 'hidden',
     borderRadius: 13,
     margin: 5,
