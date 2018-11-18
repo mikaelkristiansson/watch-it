@@ -12,7 +12,7 @@ class Triangle extends Component {
     return (
         <View>
             <View style={[AppStyles.triangle, {...extraStyle}]} />
-            {/* <View style={[AppStyles.triangleBack, {width: width, top: (width/2)+55}]} /> */}
+            <View style={{backgroundColor: AppColors.detailBackground, height: 150, position: 'absolute', top: (120+width), left: 0, width: '100%'}} />
         </View>
     );
   }

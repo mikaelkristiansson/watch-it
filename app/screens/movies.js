@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, ListView, Text, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
+import { View, FlatList, Text, ActivityIndicator, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
 // API
@@ -13,22 +13,21 @@ import { AppStyles, AppColors } from '../theme';
 const {height, width} = Dimensions.get('window');
 
 class MoviesScreen extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({ navigation, screenProps }) => ({
         headerRight:(
             <TouchableOpacity 
-                onPress={() => {alert('gg')} }
+                onPress={() => {navigation.navigate('Search')}}
                 style={{marginRight: 10}}
             >
                 <Ionicons name={'ios-search'} size={26} color={AppColors.topbar.icon} />
             </TouchableOpacity>
         ),
-    };
+    });
 
     constructor() {
         super();
         this.state = {
-            dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-            movies: [],
+            //movies: [],
             moviesLoaded: false,
             pagePending: true,
             next: 0,
@@ -49,21 +48,21 @@ class MoviesScreen extends Component {
     }
 
     processsResults(data) {
-        if (!data.results.length) return;
-        let newMovies = this.state.movies.concat(data.results);
-        newMovies.map(movie => {
-            let fav = this.props.screenProps.favourites.find(fm => fm.id === movie.id);
-            if(fav) {
-                movie.favourite = true;
-            } else {
-                movie.favourite = false;
-            }
-        });
+        this.props.screenProps.loadMovies(data);
+        // if (!data.results.length) return;
+        // let newMovies = this.state.movies.concat(data.results);
+        // newMovies.map(movie => {
+        //     let fav = this.props.screenProps.favourites.find(fm => fm.id === movie.id);
+        //     if(fav) {
+        //         movie.favourite = true;
+        //     } else {
+        //         movie.favourite = false;
+        //     }
+        // });
         this.setState({
-            movies: newMovies,
+            //movies: newMovies,
             moviesLoaded: true,
             pagePending: false,
-            dataSource: this.getDataSource(newMovies),
             next: parseInt(data.page)+1
         });
       }
@@ -98,23 +97,22 @@ class MoviesScreen extends Component {
         } else {
             this.props.screenProps.saveFavourite(movie);
         }
-        const movies = this.state.movies;
-        const idx = movies.findIndex(m => m.id === movie.id);
-        let newMovies = movies.slice();
-        newMovies[idx] = {
-        ...movies[idx],
-        favourite: !isFavourite,
-        };
+        // const movies = this.state.movies;
+        // const idx = movies.findIndex(m => m.id === movie.id);
+        // let newMovies = movies.slice();
+        // newMovies[idx] = {
+        // ...movies[idx],
+        // favourite: !isFavourite,
+        // };
 
-        this.setState({
-            movies: newMovies,
-            dataSource: this.state.dataSource.cloneWithRows(newMovies),
-        });
+        // this.setState({
+        //     movies: newMovies,
+        // });
     }
 
     render() {
         const { navigate } = this.props.navigation;
-        const { favourites } = this.props.screenProps;
+        let { movies } = this.props.screenProps;
         if (!this.state.moviesLoaded) {
             return (
                 <View style={AppStyles.container}>
@@ -124,31 +122,28 @@ class MoviesScreen extends Component {
         }
         return (
             <View style={AppStyles.container}>
-                <ListView
+                <FlatList
                     style={AppStyles.listView}
-                    ref='listview'
-                    dataSource={this.state.dataSource}
-                    renderFooter={() => this.renderFooter()}
-                    renderRow={(movie) => (
-                        <CardHolder
-                            movie={movie}
+                    data={this.props.screenProps.movies}
+                    renderItem={({ item, index }) => (
+                        <CardHolder 
+                            movie={item} 
                             width={width}
+                            row={index}
                             setFavourite={(isFavourite) => {
-                                this.setFavourite(isFavourite, movie);
+                                this.setFavourite(isFavourite, item);
                             }}
                             onSelect={() => {
                                 navigate('Detail', {
-                                    movie: movie, 
-                                    favourite: favourites.find(fm => fm.id === movie.id), 
-                                    setFavourite: (isFavourite) => this.setFavourite(isFavourite, movie)
+                                    movie: item, 
+                                    favourite: movies.find(fm => fm.id === item.id),
+                                    setFavourite: (isFavourite) => this.setFavourite(isFavourite, item)
                                 });
                             }}
                         />
                     )}
                     onEndReached={this.onEndReached}
-                    automaticallyAdjustContentInsets={false}
-                    keyboardDismissMode='on-drag'
-                    showsVerticalScrollIndicator={true}
+                    keyExtractor={item => item.id}
                 />
             </View>
         );

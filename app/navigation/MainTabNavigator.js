@@ -6,7 +6,6 @@ import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 // SCREENS
 import MoviesScreen from '../screens/movies';
 import SavedScreen from '../screens/saved';
-import DetailScreen from '../screens/detail';
 
 // THEME
 import { AppColors, AppStyles } from '../theme';
@@ -14,10 +13,7 @@ import { AppColors, AppStyles } from '../theme';
 const movieStack = StackNavigator({
   Movies: {
     screen: MoviesScreen,
-  },
-  Detail: {
-    screen: DetailScreen,
-  },
+  }
 },
 {
   navigationOptions: ({ navigation }) => ({
@@ -34,10 +30,7 @@ const movieStack = StackNavigator({
 const savedStack = StackNavigator({
   Saved: {
     screen: SavedScreen,
-  },
-  Detail: {
-    screen: DetailScreen,
-  },
+  }
 },
 {
   navigationOptions: ({ navigation }) => ({
@@ -53,10 +46,10 @@ const savedStack = StackNavigator({
 export default TabNavigator(
   {
     Movies: {
-      screen: movieStack,
+      screen: MoviesScreen,
     },
     Saved: {
-      screen: savedStack
+      screen: SavedScreen
     }
   },
   {
@@ -83,7 +76,12 @@ export default TabNavigator(
         );
       },
       title: `${navigation.state.routeName.toUpperCase()}`,
-      header: null,
+      //header: null,
+      headerStyle: AppStyles.headerStyle,
+      headerTintColor: AppColors.topbar.title,
+      headerTitleStyle: {
+        fontFamily: 'dosis-bold',
+      }
     }),
     tabBarOptions: {
       style: {
@@ -98,7 +96,7 @@ export default TabNavigator(
       },
       showLabel: false,
     },
-    //tabBarComponent: TabBarBottom,
+    tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: true,

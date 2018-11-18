@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
+import DetailScreen from '../screens/detail';
+import SearchScreen from '../screens/search';
 //import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -10,6 +12,12 @@ const RootStackNavigator = StackNavigator(
     Main: {
       screen: MainTabNavigator,
     },
+    Detail: {
+      screen: DetailScreen,
+    },
+    Search: {
+      screen: SearchScreen,
+    }
   },
   {
     navigationOptions: () => ({
@@ -31,7 +39,9 @@ class RootNavigator extends Component {
 
   render() {
     return <RootStackNavigator screenProps={{
+      movies: this.props.movies,
       favourites: this.props.favourites,
+      loadMovies: (movies) => this.props.loadMovies(movies),
       saveFavourite: (movie) => this.props.saveFavourite(movie),
       removeFavourite: (movie) => this.props.removeFavourite(movie),
       }} />;

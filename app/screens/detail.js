@@ -6,7 +6,7 @@ import {
     Text, 
     ActivityIndicator,
     Image,
-    Dimensions
+    Dimensions,
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
@@ -25,13 +25,11 @@ const {height, width} = Dimensions.get('window');
 
 class DetailScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
-        headerStyle: [AppStyles.headerStyle, {backgroundColor: 'transparent', borderBottomColor: 'transparent'}],
+        headerStyle: AppStyles.headerDetailStyle,
         title: null,
+        headerTintColor: 'white',
         headerBackTitleStyle: {
             display: 'none'
-        },
-        headerTitleStyle: {
-            color: '#fff'
         },
         headerRight:(
             <TouchableOpacity 
@@ -101,8 +99,8 @@ class DetailScreen extends Component {
                             }}/>
                         </View>
                         <View style={{paddingTop: 250}}>
-                        <Text style={AppStyles.movieTitle}>{movie.title.toUpperCase()}</Text>
-                        {this.renderMovieInfo()}
+                            <Text style={AppStyles.movieTitle}>{movie.title.toUpperCase()}</Text>
+                            {this.renderMovieInfo()}
                         </View>
                     </View>
                 </ScrollView>
